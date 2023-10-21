@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Song</title>
+</head>
+<body>
+    <h1>Create a New Author</h1>
+    <form id="songForm">
+
+        <label for="name">name:</label>
+        <textarea id="name" name="name" required></textarea><br><br>
+
+        <label for="bio">bio:</label>
+        <input type="text" id="bio" name="bio"><br><br>
+
+        <label for="birthdate">birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate"><br><br>
+
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image"><br><br>
+
+
+        <button type="submit">Create Author</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const songForm = document.getElementById('songForm');
+
+        songForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(songForm);
+
+            // Convert form data to an object
+            const bodyData = {};
+            formData.forEach((value, key) => {
+                bodyData[key] = value;
+            });
+
+            try {
+                const response = await axios({
+                    method: 'POST',
+                    url: 'http://localhost:3030/authors',
+                    data: bodyData
+                });
+
+                console.log('Song created:', response.data);
+                alert('authorId: '+ response.data._id)
+                // Handle success, e.g., show a success message
+            } catch (error) {
+                console.error('Error creating song:', error);
+                // Handle error, e.g., show an error message
+            }
+        });
+    </script>
+</body>
+</html>
