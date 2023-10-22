@@ -16,6 +16,10 @@ const AuthorSchema = new mongoose.Schema({
       type: String,
       default: null
     },
+    video: {
+      type: String,
+      default: ''
+    },
     dateAdded: {
       type: Date,
       default: Date.now

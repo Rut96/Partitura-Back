@@ -61,7 +61,7 @@ exports.search_song_by_author = async (req, res) => {
     if (!author) {
       return res.status(400).send('Please provide an author');
     }
-    const songs = await Songs.find({ author: { $regex: author, $options: 'i' } });
+    const songs = await Songs.find({ author });
     res.json(songs);
 };
 
